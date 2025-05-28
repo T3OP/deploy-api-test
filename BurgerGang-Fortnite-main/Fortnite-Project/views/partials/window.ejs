@@ -1,0 +1,44 @@
+<section class="sliding-venster" id="slidingvenster">
+  <section class="venster-content">
+    <a href="#" class="close-button">
+      <svg viewBox="0 0 24 24" width="32" height="32">
+        <path
+          fill="var(--fortnite-yellow)"
+          d="M19,6.41L17.59,5L12,10.59L6.41,5L5,6.41L10.59,12L5,17.59L6.41,19L12,13.41L17.59,19L19,17.59L13.41,12L19,6.41Z"
+        />
+      </svg>
+    </a>
+      <div class="info-item">
+        <span class="info-label">Gebruikersnaam</span>
+        <span class="info-value"><%= locals.username || 'Not logged in' %></span>
+      </div>
+      <div class="info-item">
+        <span class="info-label">E-mail</span>
+        <span class="info-value"><%= locals.email || 'Not available' %></span>
+      </div>
+      <div class="info-item">
+        <span class="info-label">Account gemaakt op</span>
+        <span class="info-value"><%= locals.createdAt ? new Date(locals.createdAt).toLocaleDateString() : 'Not available' %></span>
+      </div>
+    
+    <form action="/logout" method="POST">
+      <button type="submit" class="fortnite-button red">
+        <span>Uitloggen</span>
+      </button>
+    </form>
+  </section>
+</section>
+
+<script>
+  const pfp = document.querySelector("#pfp-icon");
+  const slidingvenster = document.getElementById("slidingvenster");
+
+  pfp.addEventListener("click", () => {
+    slidingvenster.classList.toggle("open");
+  });
+
+  document.querySelector(".close-button").addEventListener("click", (e) => {
+    e.preventDefault();
+    slidingvenster.classList.remove("open");
+  });
+</script>
