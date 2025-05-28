@@ -1,0 +1,102 @@
+<!-- Include head -->
+<%- include('./partials/head') %>
+<!-- Include nav -->
+<%- include('./partials/nav') %>
+
+<main class="locker-container">
+  <!-- Linker kolom -->
+
+  <aside class="items-column">
+    <a href="./lockerdetails?type=character" class="item-slot">
+      <header class="slot-title">Personage</header>
+      <img class="item-image" src="<%= currentOutfit?.images?.smallIcon || '/images/Profile.webp' %>" alt="Karakter" />
+      <p class="item-name"><%= currentOutfit?.name || 'Astronaut' %></p>
+    </a>
+
+    <a href="./lockerdetails?type=pickaxe" class="item-slot">
+      <header class="slot-title">Bijl</header>
+      <img
+        class="item-image"
+        src="<%= currentWeapon?.images?.smallIcon || '/images/Harvesting Tool Locker Graphic.PNG' %>"
+        alt="Bijl"
+      />
+      <p class="item-name"><%= currentWeapon?.name || 'Gewone Bijl' %></p>
+    </a>
+  </aside>
+
+  <!-- Middenste deel -->
+
+  <section class="character-container">
+    <!-- Personage -->
+    <div class="character-wrapper">
+      <img class="character" src="<%= currentOutfit?.images?.featured || currentOutfit?.images?.icon || '/images/Full character.png' %>" alt="<%= currentOutfit?.name || 'Karakter' %>" />
+    </div>
+    <p class="character-name"><%= username || 'John_Pork_2012' %></p>
+
+    <!-- Bovenste knopjes -->
+
+    <ul class="utility-buttons">
+      <li>
+        <form action="/item/<%= currentOutfit.id %>" method="GET">
+        <button type="submit" class="utility-button" id="rotate-button">
+          <img src="/images/Wv8dnX.png" alt="Draaien" />
+        </button>
+      </form>
+      </li>
+      <li>
+        <form action="/item/<%= currentOutfit.id %>/edit" method="GET">
+        <button type="submit" class="utility-button">
+          <img src="/images/ftLA85.png" alt="Notities" />
+        </button>
+      </form>
+      </li>
+      <li>
+        <form action="/setfavorite" method="POST">
+          <input type="hidden" name="currentOutfit" value="<%= JSON.stringify(currentOutfit) %>">
+          <button type="submit" class="utility-button" onclick="showPopup('Toegevoegd aan favorieten!'); return true;">
+            <img src="/images/starLocker.png" alt="Favoriet" />
+          </button>
+        </form>
+      </li>
+      <li>
+        <div class="utility-button">
+          <button type="button" class="add-to-pfp" style="background: none; border: none; padding: 0; cursor: pointer;" onclick="showPopup('Profielafbeelding bijgewerkt!'); return false;">
+            <img src="/images/gdilKB.png" alt="Toevoegen" />
+          </button>
+        </div>
+      </li>
+    </ul>
+
+    <!-- Onderste knopjes -->
+
+    <article class="action-buttons">
+      <a href="./lobby" class="action-button">Terug</a>
+      <form action="/random" method="post">
+        <button class="action-button random" onclick="showPopup('Willekeurige items geselecteerd!'); return true;"">Willekeurig</button>
+      </form>
+    </article>
+  </section>
+
+  <!-- Rechter kolom -->
+
+  <aside class="items-column">
+    <a href="./lockerdetails?type=emote" class="item-slot">
+      <header class="slot-title">Emote</header>
+      <img class="item-image" src="<%= currentEmote?.images?.smallIcon || '/images/boogiedown.webp' %>" alt="Emote" />
+      <p class="item-name"><%= currentEmote?.name || 'Boogie Down' %></p>
+    </a>
+
+    <a href="./lockerdetails" class="item-slot">
+      <header class="slot-title">Rugzak</header>
+      <img
+        class="item-image"
+        src="<%= currentBackpack?.images?.smallIcon %>"
+        alt="Rugzak"
+      />
+      <p class="item-name"><%= currentBackpack?.name || 'Gewone Rugzak' %></p>
+    </a>
+  </aside>
+</main>
+
+<%- include('./partials/window') %>
+<%- include('./partials/foot') %>
